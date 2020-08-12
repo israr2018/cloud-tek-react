@@ -1,13 +1,13 @@
 const express=require('express');
 const path=require('path');
 const app=express();
-// app.use(express.static(path.join(__dirname+'/dist/mcza6')));
-app.use(express.static('../build'));
+ app.use(express.static(path.join(__dirname+'/build')));
+
 const port=process.env.PORT||8080;
 //app.use(cors({credentials: true, origin: true}));
 app.get('/*',function(req,res){
-  res.send("Hello World");
-  //res.sendFile('./build/index.html');
+  //res.send("Hello World");
+  res.sendFile('./build/index.html');
 });
 
 // app.get('/',function(req,res) {
