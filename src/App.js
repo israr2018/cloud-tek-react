@@ -5,7 +5,8 @@ import NewCouponForm from './components/NewCouponForm';
 import EditCouponForm from './components/EditCouponForm';
 
 function App() {
-  
+  const remotebaseUrl="https://cloud-tek-api.herokuapp.com/api/stripe/coupons";
+  const localbaseUrl="http://localhost:8080/api/stripe/coupons/";
   const [isLoading,setIsLoading]=React.useState(true);
   const [edit,setEdit]=React.useState(false);
   // const [users,setUsers]=React.useState(users_data);
@@ -28,7 +29,7 @@ function App() {
   }, [])
  const getCoupons=()=>{
    setIsLoading(true);
-   axios.get("http://localhost:8080/api/stripe/coupons").then(result=>{
+   axios.get(remotebaseUrl).then(result=>{
     const coupon_list=result.data.data.data;
     setCoupons(coupon_list);
     setIsLoading(false);
@@ -40,7 +41,7 @@ function App() {
   //  const payload={};
   //  payload["metadata"]=new_coupon;
     console.log("new_coupon:"+JSON.stringify(new_coupon));
-    axios.post("http://localhost:8080/api/stripe/coupons",new_coupon).then(coupon=>{
+    axios.post(remotebaseUrl,new_coupon).then(coupon=>{
     getCoupons();
    }).catch(err=>{
      console.log("err"+err);
@@ -59,7 +60,7 @@ function App() {
  const deleteCoupon=(id)=>{
   //  let _users=users.filter((user)=>(user.id!==id));
   //  setUsers(_users);
-  axios.delete("http://localhost:8080/api/stripe/coupons/"+id).then((deltetedCoupon)=>{
+  axios.delete(remotebaseUrl+id).then((deltetedCoupon)=>{
     getCoupons();
    }).catch((err)=>{
     getCoupons();
@@ -68,7 +69,7 @@ function App() {
  };
  const updateCoupon=(coupon)=>{
    
-   axios.put("http://localhost:8080/api/stripe/coupons",coupon)
+   axios.put(remotebaseUrl,coupon)
    .then(updatedCoupon=>{
     
     getCoupons();
