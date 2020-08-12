@@ -6,8 +6,8 @@ app.use(express.static('../build'));
 const port=process.env.PORT||8080;
 //app.use(cors({credentials: true, origin: true}));
 app.get('/*',function(req,res){
-
-  res.sendFile('../build/index.html');
+  res.send("Hello World");
+  //res.sendFile('../build/index.html');
 });
 
 // app.get('/',function(req,res) {
